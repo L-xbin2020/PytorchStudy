@@ -5,6 +5,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 import torch
 
+
 batch_size = 64
 transform = transforms.Compose([
     transforms.ToTensor(),
@@ -63,7 +64,9 @@ def train(epoch):
     running_loss = 0.0
     for batch_idx, data in enumerate(train_loader, 0):
         inputs, target = data
+        # 传入gpu
         inputs, target = inputs.to(device), target.to(device)
+
         optimizer.zero_grad()
 
         output = model(inputs)

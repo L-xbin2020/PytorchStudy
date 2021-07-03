@@ -43,6 +43,8 @@ dataset2 = MyDataset('datasets/train.csv')
 print(len(dataset2.x_data))
 total_data = DataLoader(dataset=dataset2, batch_size=1, shuffle=True, num_workers=0)
 
+print(len(total_data))
+
 # print(dataset2.y_data)
 model2 = Model()
 
@@ -93,10 +95,21 @@ for i, data in enumerate(total_data, 0):
     inputs, labels = data
     inputs = inputs.float()
     labels = labels.float()
+
+    output = model2(inputs)
     print("*"*50)
+    print(i)
     print(inputs)
-    print(labels)
+    print(labels.size(0))
+    b = (output == labels).sum()
+    print(b.item())
     print("*"*50)
+    # output = model2(inputs)
+    # print(output)
+    # print(output.data)
+    # print(labels.size())
+    break
+
 
     # y_pred = model2(inputs)
     # print(y_pred.shape)
